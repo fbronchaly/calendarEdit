@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
-import {DataSource} from '@angular/cdk/collections';
-import {Observable} from 'rxjs/Observable';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import { Component } from '@angular/core';
+import { DataSource } from '@angular/cdk/collections';
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/observable/of';
 
 @Component({
@@ -10,14 +10,21 @@ import 'rxjs/add/observable/of';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  displayedColumns = ['name', 'symbol', 'comment'];
+  displayedColumns = ['name', 'symbol', 'comment', 'n1', 'n2'];
   dataSource = new ExampleDataSource(initialData);
 
-  update(el: Element, comment: string) {
-    if (comment == null) { return; }
+  update(el: Element, comment: string, n1: string, n2: string) {
+    console.log('Elemento: ');
+    console.log(el);
+    console.log('Comentario: ' + comment + n1 + n2);
+
+    if (comment == null) {
+      return;
+    }
     // copy and mutate
-    const copy = this.dataSource.data().slice()
-    el.comment = comment;
+    const copy = this.dataSource.data().slice();
+    el.comment = comment; // Actualiza el elemento en copy
+    el.symbol = 'RACATA';
     this.dataSource.update(copy);
   }
 }
@@ -26,29 +33,31 @@ export interface Element {
   name: string;
   symbol: string;
   comment?: string;
+  n1?: string;
+  n2?: string;
 }
 
 const initialData: Element[] = [
-  {name: 'Hydrogen', symbol: 'H'},
-  {name: 'Helium', symbol: 'He'},
-  {name: 'Lithium', symbol: 'Li'},
-  {name: 'Beryllium', symbol: 'Be'},
-  {name: 'Boron', symbol: 'B'},
-  {name: 'Carbon', symbol: 'C'},
-  {name: 'Nitrogen', symbol: 'N'},
-  {name: 'Oxygen', symbol: 'O'},
-  {name: 'Fluorine', symbol: 'F'},
-  {name: 'Neon', symbol: 'Ne'},
-  {name: 'Sodium', symbol: 'Na'},
-  {name: 'Magnesium', symbol: 'Mg'},
-  {name: 'Aluminum', symbol: 'Al'},
-  {name: 'Silicon', symbol: 'Si'},
-  {name: 'Phosphorus', symbol: 'P'},
-  {name: 'Sulfur', symbol: 'S'},
-  {name: 'Chlorine', symbol: 'Cl'},
-  {name: 'Argon', symbol: 'Ar'},
-  {name: 'Potassium', symbol: 'K'},
-  {name: 'Calcium', symbol: 'Ca'},
+  { name: 'Hydrogen', symbol: 'H', n1: '', n2: '' },
+  { name: 'Helium', symbol: 'He', n1: '', n2: '' },
+  { name: 'Lithium', symbol: 'Li', n1: '', n2: '' },
+  { name: 'Beryllium', symbol: 'Be', n1: '', n2: '' },
+  { name: 'Boron', symbol: 'B', n1: '', n2: '' },
+  { name: 'Carbon', symbol: 'C', n1: '', n2: '' },
+  { name: 'Nitrogen', symbol: 'N', n1: '', n2: '' },
+  { name: 'Oxygen', symbol: 'O', n1: '', n2: '' },
+  { name: 'Fluorine', symbol: 'F', n1: '', n2: '' },
+  { name: 'Neon', symbol: 'Ne', n1: '', n2: '' },
+  { name: 'Sodium', symbol: 'Na', n1: '', n2: '' },
+  { name: 'Magnesium', symbol: 'Mg', n1: '', n2: '' },
+  { name: 'Aluminum', symbol: 'Al', n1: '', n2: '' },
+  { name: 'Silicon', symbol: 'Si', n1: '', n2: '' },
+  { name: 'Phosphorus', symbol: 'P', n1: '', n2: '' },
+  { name: 'Sulfur', symbol: 'S', n1: '', n2: '' },
+  { name: 'Chlorine', symbol: 'Cl', n1: '', n2: '' },
+  { name: 'Argon', symbol: 'Ar', n1: '', n2: '' },
+  { name: 'Potassium', symbol: 'K', n1: '', n2: '' },
+  { name: 'Calcium', symbol: 'Ca', n1: '', n2: '' }
 ];
 
 /**
@@ -58,10 +67,11 @@ const initialData: Element[] = [
  * devolvemos una secuencia que contiene solo un conjunto de datos que no cambia.
  */
 export class ExampleDataSource extends DataSource<any> {
-
   private dataSubject = new BehaviorSubject<Element[]>([]);
 
   data() {
+    console.log('DATASUBJECT');
+    console.log(this.dataSubject);
     return this.dataSubject.value;
   }
 
@@ -72,9 +82,10 @@ export class ExampleDataSource extends DataSource<any> {
   constructor(data: any[]) {
     super();
     this.dataSubject.next(data);
+    console.log(data);
   }
 
-  /** Connect function called by the table to retrieve one stream containing the data to render. */
+  /* Función de conexión llamada por la tabla para recuperar una secuencia que contiene los datos para representar. */
   connect(): Observable<Element[]> {
     return this.dataSubject;
   }
