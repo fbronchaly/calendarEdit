@@ -1,5 +1,11 @@
 <app-header></app-header>
 
+<app-inData (newItemEvent)="addItem($event)"></app-inData>
+
+<ul>
+  <li *ngFor="let item of items">{{item}}</li>
+</ul>
+
 <div style="padding: 32px">
   <div class="example-container mat-elevation-z8">
     <mat-table #table [dataSource]="dataSource">

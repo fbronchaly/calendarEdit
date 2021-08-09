@@ -13,6 +13,14 @@ export class AppComponent {
   displayedColumns = ['name', 'symbol', 'comment', 'n1', 'n2'];
   dataSource = new ExampleDataSource(initialData);
 
+  items = ['item1', 'item2', 'item3', 'item4'];
+
+  addItem(newItem: string) {
+    console.log('1');
+    this.items.push(newItem);
+    console.log(this.items);
+  }
+
   update(el: Element, comment: string, n1: string, n2: string) {
     console.log('Elemento: ');
     console.log(el);

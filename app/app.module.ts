@@ -8,13 +8,14 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { InlineEditComponent } from './inline-edit/inline-edit.component';
 import { AppMaterialModules } from './material.module';
+import { InDataComponent } from './inData/inData.component';
 
 @NgModule({
   imports: [
     BrowserModule,
-    BrowserAnimationsModule, 
-    FormsModule, 
-    ReactiveFormsModule, 
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
     SatPopoverModule,
     // Material Modules
     AppMaterialModules
@@ -22,8 +23,9 @@ import { AppMaterialModules } from './material.module';
   declarations: [
     AppComponent,
     HeaderComponent,
-    InlineEditComponent
+    InlineEditComponent,
+    InDataComponent
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
