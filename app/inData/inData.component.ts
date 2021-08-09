@@ -12,14 +12,17 @@ export class InDataComponent {
     this.newItemEvent.emit(value);
   }
 
-constructor(){
-  aaa:AppComponent
-}
+  constructor(aaa: AppComponent) {
+    let a: any = {
+      el: { name: 'Hydrogen', symbol: 'H' },
+      comment: 'Hello',
+      n1: 'X',
+      n2: 'O'
+    };
+    let b: string = 'a';
+    let c: string = 'c';
+    let d: string = 'd';
 
-  a: string = "";
-  b: string = "";
-  c: string = "";
-  d: string = "";
-
-  this.aaa.update(a,b,c,d);
+    aaa.update(a, b, c, d);
+  }
 }
